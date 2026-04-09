@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FitTrack Pro</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI';
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg,#4f46e5,#06b6d4);
+        }
+
+        .box {
+            width: 350px;
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .row input { width: 50%; }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            margin-top: 10px;
+            color: white;
+            background: #00c6ff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>🏃 FitTrack Pro</h2>
+
+    <input placeholder="Name">
+
+    <div class="row">
+        <input placeholder="Steps">
+        <input placeholder="Calories">
+    </div>
+
+    <div class="row">
+        <input placeholder="Duration">
+        <input placeholder="Weight (kg)">
+    </div>
+
+    <input placeholder="Height (m)">
+
+    <button onclick="enterDashboard()">Enter Dashboard →</button>
+</div>
+
+<script>
+function enterDashboard() {
+    let inputs = document.querySelectorAll("input");
+
+    let data = {
+        name: inputs[0].value,
+        steps: +inputs[1].value,
+        calories: +inputs[2].value,
+        duration: +inputs[3].value,
+        weight: +inputs[4].value,
+        height: +inputs[5].value
+    };
+
+    localStorage.setItem("userData", JSON.stringify(data));
+
+    window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

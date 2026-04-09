@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FitTrack Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2 id="greeting"></h2>
+
+<!-- TOP -->
+<div class="top-row">
+
+    <div class="card big">
+        <h3>Steps</h3>
+        <div class="circle" id="stepsRing"></div>
+        <p id="stepsRemain"></p>
+    </div>
+
+    <div class="card big">
+        <h3>Calories</h3>
+        <div class="circle" id="calRing"></div>
+        <p id="calRemain"></p>
+    </div>
+
+</div>
+
+<!-- SMALL -->
+<div class="bottom-row">
+
+    <div class="card small">
+        <h3>BMI</h3>
+        <p id="bmiValue"></p>
+    </div>
+
+    <div class="card small">
+        <h3>Duration</h3>
+        <p id="durValue"></p>
+    </div>
+
+</div>
+
+<!-- GRAPHS -->
+<div class="graph-row">
+
+    <div class="graph-card">
+        <h3>Steps Analytics</h3>
+        <canvas id="stepsChart"></canvas>
+    </div>
+
+    <div class="graph-card">
+        <h3>Calories Analytics</h3>
+        <canvas id="calChart"></canvas>
+    </div>
+
+</div>
+
+<p id="streak"></p>
+
+<h3 id="stepsComment"></h3>
+<h3 id="calComment"></h3>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

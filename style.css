@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI';
+    background: #0f172a;
+    color: white;
+    padding: 20px;
+}
+
+/* Layout */
+.top-row, .bottom-row, .graph-row {
+    display: flex;
+    gap: 20px;
+}
+
+/* Cards */
+.card {
+    border-radius: 20px;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Big */
+.big {
+    flex: 1;
+    height: 220px;
+    background: linear-gradient(135deg,#ff4ecd,#ff0080);
+}
+
+/* Small */
+.small {
+    flex: 1;
+    height: 120px;
+    background: linear-gradient(135deg,#34d399,#059669);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Circle */
+.circle {
+    width: 110px;
+    height: 110px;
+    margin: 10px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(#00f2fe 0%, rgba(255,255,255,0.2) 0%);
+}
+
+/* Graph */
+.graph-card {
+    flex: 1;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 20px;
+}
