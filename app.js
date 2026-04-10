@@ -1,20 +1,28 @@
 let stepGoal = 10000;
 let calGoal = 500;
 
-// GET USER
+// USER DATA
 let user = JSON.parse(localStorage.getItem("userData")) || {};
-let username = user.name || "guest";
+let username = user.name || "User";
 
 document.getElementById("greeting").innerText =
     "Hello, " + username + " 👋";
 
+// DISPLAY GOALS
+document.getElementById("stepGoalText").innerText =
+    "Goal: " + stepGoal + " steps";
+
+document.getElementById("calGoalText").innerText =
+    "Goal: " + calGoal + " calories";
+
+// VALUES
 let steps = user.steps || 0;
 let calories = user.calories || 0;
 let duration = user.duration || 0;
 let weight = user.weight || 0;
 let height = user.height || 1;
 
-// UPDATE RINGS
+// RINGS
 updateRing("stepsRing", steps, stepGoal);
 updateRing("calRing", calories, calGoal);
 
@@ -40,14 +48,11 @@ function getComment(percent) {
     else return "Start moving! ⚡";
 }
 
-let stepPercent = (steps / stepGoal) * 100;
-let calPercent = (calories / calGoal) * 100;
-
 document.getElementById("stepsComment").innerText =
-    "Steps: " + getComment(stepPercent);
+    "Steps: " + getComment((steps / stepGoal) * 100);
 
 document.getElementById("calComment").innerText =
-    "Calories: " + getComment(calPercent);
+    "Calories: " + getComment((calories / calGoal) * 100);
 
 // RING FUNCTION
 function updateRing(id, value, goal) {
@@ -60,12 +65,11 @@ function updateRing(id, value, goal) {
         `conic-gradient(#00f2fe ${percent}%, rgba(255,255,255,0.2) ${percent}%)`;
 }
 
-// USER-SPECIFIC HISTORY
+// MULTI-USER HISTORY
 let historyKey = "history_" + username;
-
 let history = JSON.parse(localStorage.getItem(historyKey)) || [];
 
-history.push({ steps: steps, calories: calories });
+history.push({ steps, calories });
 
 if (history.length > 7) history.shift();
 
@@ -76,29 +80,20 @@ let labels = history.map((_, i) => "Day " + (i + 1));
 let stepsData = history.map(d => d.steps);
 let calData = history.map(d => d.calories);
 
-// STEPS GRAPH
+// CHARTS
 new Chart(document.getElementById("stepsChart"), {
     type: "line",
     data: {
-        labels: labels,
-        datasets: [{
-            data: stepsData,
-            borderColor: "#00f2fe",
-            tension: 0.4
-        }]
+        labels,
+        datasets: [{ data: stepsData, borderColor: "#00f2fe", tension: 0.4 }]
     }
 });
 
-// CALORIES GRAPH
 new Chart(document.getElementById("calChart"), {
     type: "line",
     data: {
-        labels: labels,
-        datasets: [{
-            data: calData,
-            borderColor: "#ff4ecd",
-            tension: 0.4
-        }]
+        labels,
+        datasets: [{ data: calData, borderColor: "#ff4ecd", tension: 0.4 }]
     }
 });
 
