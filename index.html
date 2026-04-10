@@ -75,13 +75,31 @@
 function enterDashboard() {
     let inputs = document.querySelectorAll("input");
 
+    let name = inputs[0].value.trim();
+    let steps = +inputs[1].value;
+    let calories = +inputs[2].value;
+    let duration = +inputs[3].value;
+    let weight = +inputs[4].value;
+    let height = +inputs[5].value;
+
+    // VALIDATION
+    if (!name || !steps || !calories || !duration || !weight || !height) {
+        alert("Please fill all fields ❗");
+        return;
+    }
+
+    if (steps < 0 || calories < 0 || duration < 0 || weight <= 0 || height <= 0) {
+        alert("Values must be positive ❗");
+        return;
+    }
+
+    if (height > 3) {
+        alert("Enter height in meters (e.g., 1.75)");
+        return;
+    }
+
     let data = {
-        name: inputs[0].value,
-        steps: +inputs[1].value,
-        calories: +inputs[2].value,
-        duration: +inputs[3].value,
-        weight: +inputs[4].value,
-        height: +inputs[5].value
+        name, steps, calories, duration, weight, height
     };
 
     localStorage.setItem("userData", JSON.stringify(data));
