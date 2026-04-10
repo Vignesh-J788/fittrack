@@ -35,7 +35,22 @@ document.getElementById("calRemain").innerText =
 
 // BMI
 let bmi = (weight / (height * height)).toFixed(2);
-document.getElementById("bmiValue").innerText = bmi;
+
+let status = "";
+
+if (bmi < 18.5) status = "Underweight ⚠️";
+else if (bmi < 25) status = "Good 👍";
+else if (bmi < 30) status = "Overweight ⚠️";
+else status = "Obese ❌";
+
+document.getElementById("bmiValue").innerText =
+    bmi + " (" + status + ")";
+let bmiText = document.getElementById("bmiValue");
+
+if (bmi < 18.5) bmiText.style.color = "#facc15";
+else if (bmi < 25) bmiText.style.color = "#22c55e";
+else if (bmi < 30) bmiText.style.color = "#f97316";
+else bmiText.style.color = "#ef4444";
 
 // Duration
 document.getElementById("durValue").innerText = duration + " min";
