@@ -23,8 +23,14 @@ let weight = user.weight || 0;
 let height = user.height || 1;
 
 // RINGS
-updateRing("stepsRing", steps, stepGoal);
-updateRing("calRing", calories, calGoal);
+updateRing("stepsRing", steps, stepGoal, "#00f2fe"); // cyan
+updateRing("calRing", calories, calGoal, "#ff4ecd"); // pink
+
+// Duration (solid progress)
+updateRing("durRing", duration, 60, "#4facfe");
+
+// BMI (use max 30 as reference)
+updateRing("bmiRing", bmi, 30, "#22c55e");
 
 // REMAINING
 document.getElementById("stepsRemain").innerText =
@@ -70,14 +76,16 @@ document.getElementById("calComment").innerText =
     "Calories: " + getComment((calories / calGoal) * 100);
 
 // RING FUNCTION
-function updateRing(id, value, goal) {
+function updateRing(id, value, goal, color) {
+
     let percent = Math.min((value / goal) * 100, 100);
+    let deg = percent * 3.6; // convert % to degrees
 
     let ring = document.getElementById(id);
     ring.innerText = value;
 
-    ring.style.background =
-        `conic-gradient(#00f2fe ${percent}%, rgba(255,255,255,0.2) ${percent}%)`;
+    ring.style.setProperty("--percent", deg + "deg");
+    ring.style.setProperty("--color", color);
 }
 
 // MULTI-USER HISTORY
