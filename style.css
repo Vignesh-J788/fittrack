@@ -6,11 +6,13 @@ body {
     padding: 20px;
 }
 
+/* Layout */
 .top-row, .bottom-row, .graph-row {
     display: flex;
     gap: 20px;
 }
 
+/* Cards */
 .card {
     border-radius: 20px;
     text-align: center;
@@ -19,19 +21,20 @@ body {
 
 .big {
     flex: 1;
-    height: 240px;
+    height: 250px;
     background: linear-gradient(135deg,#ff4ecd,#ff0080);
 }
 
 .small {
     flex: 1;
-    height: 120px;
+    height: 140px;
     background: linear-gradient(135deg,#34d399,#059669);
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+/* ARC CIRCLE */
 .circle {
     width: 120px;
     height: 120px;
@@ -40,16 +43,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
     font-weight: bold;
 
-    /* base background */
     background: conic-gradient(
         var(--color) var(--percent),
         rgba(255,255,255,0.1) var(--percent)
     );
 }
 
+/* Graph */
 .graph-card {
     flex: 1;
     background: #1e293b;
@@ -57,6 +59,7 @@ body {
     border-radius: 20px;
 }
 
+/* Goal text */
 .goal-text {
     font-size: 12px;
     opacity: 0.8;
