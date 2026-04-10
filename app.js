@@ -78,6 +78,10 @@ new Chart(document.getElementById("stepsChart"), {
             tension: 0.4
         }]
     }
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
 });
 
 // CALORIES GRAPH
@@ -90,5 +94,9 @@ new Chart(document.getElementById("calChart"), {
             borderColor: "#ff4ecd",
             tension: 0.4
         }]
+    }
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
     }
 });
