@@ -1,40 +1,21 @@
 let stepGoal = 10000;
 let calGoal = 500;
-let durGoal = 60;
 
-// USER DATA
+// GET USER DATA
 let user = JSON.parse(localStorage.getItem("userData")) || {};
-let username = user.name || "User";
+let name = user.name || "User";
 
-document.getElementById("greeting").innerText =
-    "Hello, " + username + " 👋";
+document.getElementById("greeting").innerText = "Hello, " + name + " 👋";
 
-// GOALS
-document.getElementById("stepGoalText").innerText =
-    "Goal: " + stepGoal + " steps";
-
-document.getElementById("calGoalText").innerText =
-    "Goal: " + calGoal + " calories";
-
-// VALUES
 let steps = user.steps || 0;
 let calories = user.calories || 0;
 let duration = user.duration || 0;
 let weight = user.weight || 0;
 let height = user.height || 1;
 
-// BMI
-let bmi = (weight / (height * height)).toFixed(2);
-
 // UPDATE RINGS
-updateRing("stepsRing", steps, stepGoal, "#00f2fe"); // cyan
-updateRing("calRing", calories, calGoal, "#ff4ecd"); // pink
-updateRing("durRing", duration, durGoal, "#4facfe"); // blue
-updateRing("bmiRing", bmi, 30, "#22c55e"); // green
-
-// TEXT INSIDE
-document.getElementById("bmiRing").innerText = bmi;
-document.getElementById("durRing").innerText = duration;
+updateRing("stepsRing", "stepsValue", steps, stepGoal, "#00f2fe");
+updateRing("calRing", "calValue", calories, calGoal, "#ff4ecd");
 
 // REMAINING
 document.getElementById("stepsRemain").innerText =
@@ -43,49 +24,50 @@ document.getElementById("stepsRemain").innerText =
 document.getElementById("calRemain").innerText =
     "Remaining: " + Math.max(calGoal - calories, 0);
 
-// COMMENTS
-function getComment(percent) {
-    if (percent >= 100) return "Amazing! 🚀";
-    else if (percent >= 70) return "Awesome! 🔥";
-    else if (percent >= 30) return "Keep going! 💪";
-    else return "Start moving! ⚡";
-}
+// BMI
+let bmi = (weight / (height * height)).toFixed(2);
 
-document.getElementById("stepsComment").innerText =
-    "Steps: " + getComment((steps / stepGoal) * 100);
+let status = "";
+if (bmi < 18.5) status = "Underweight";
+else if (bmi < 25) status = "Good";
+else if (bmi < 30) status = "Overweight";
+else status = "Obese";
 
-document.getElementById("calComment").innerText =
-    "Calories: " + getComment((calories / calGoal) * 100);
+document.getElementById("bmiValue").innerText = bmi + " (" + status + ")";
 
-// RING FUNCTION
-function updateRing(id, value, goal, color) {
+// Duration
+document.getElementById("durValue").innerText = duration + " min";
+
+// RING FUNCTION (ONLY BORDER ARC)
+function updateRing(ringId, textId, value, goal, color) {
+
     let percent = Math.min((value / goal) * 100, 100);
     let deg = percent * 3.6;
 
-    let ring = document.getElementById(id);
+    let ring = document.getElementById(ringId);
 
-    ring.innerText = value;
+    ring.style.background =
+        `conic-gradient(${color} ${deg}deg, rgba(255,255,255,0.1) ${deg}deg)`;
 
-    ring.style.setProperty("--percent", deg + "deg");
-    ring.style.setProperty("--color", color);
+    document.getElementById(textId).innerText = value;
 }
 
-// MULTI-USER HISTORY
-let historyKey = "history_" + username;
-let history = JSON.parse(localStorage.getItem(historyKey)) || [];
+// HISTORY (MULTI USER)
+let key = "history_" + name;
+let history = JSON.parse(localStorage.getItem(key)) || [];
 
 history.push({ steps, calories });
 
 if (history.length > 7) history.shift();
 
-localStorage.setItem(historyKey, JSON.stringify(history));
+localStorage.setItem(key, JSON.stringify(history));
 
 // GRAPH DATA
 let labels = history.map((_, i) => "Day " + (i + 1));
 let stepsData = history.map(d => d.steps);
 let calData = history.map(d => d.calories);
 
-// CHARTS
+// STEPS GRAPH
 new Chart(document.getElementById("stepsChart"), {
     type: "line",
     data: {
@@ -98,6 +80,7 @@ new Chart(document.getElementById("stepsChart"), {
     }
 });
 
+// CALORIES GRAPH
 new Chart(document.getElementById("calChart"), {
     type: "line",
     data: {
@@ -109,7 +92,3 @@ new Chart(document.getElementById("calChart"), {
         }]
     }
 });
-
-// STREAK
-document.getElementById("streak").innerText =
-    "🔥 Streak: " + history.length + " days";
