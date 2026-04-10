@@ -63,7 +63,11 @@ body {
     gap: 20px;
 }
 
-canvas {
+/* Each graph box */
+.graph-row canvas {
+    flex: 1;
+    max-width: 48%;
+    height: 220px !important; /* reduce height */
     background: #1e293b;
     border-radius: 20px;
     padding: 10px;
