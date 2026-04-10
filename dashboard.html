@@ -10,19 +10,17 @@
 
 <div class="top-row">
 
-    <div class="card steps">
+    <div class="card big">
         <h3>Steps</h3>
-        <div class="ring" id="stepsRing">
-            <span id="stepsValue"></span>
-        </div>
+        <p class="goal-text" id="stepGoalText"></p>
+        <div class="circle" id="stepsRing"></div>
         <p id="stepsRemain"></p>
     </div>
 
-    <div class="card calories">
+    <div class="card big">
         <h3>Calories</h3>
-        <div class="ring" id="calRing">
-            <span id="calValue"></span>
-        </div>
+        <p class="goal-text" id="calGoalText"></p>
+        <div class="circle" id="calRing"></div>
         <p id="calRemain"></p>
     </div>
 
@@ -30,12 +28,12 @@
 
 <div class="bottom-row">
 
-    <div class="card bmi">
+    <div class="card small">
         <h3>BMI</h3>
         <p id="bmiValue"></p>
     </div>
 
-    <div class="card duration">
+    <div class="card small">
         <h3>Duration</h3>
         <p id="durValue"></p>
     </div>
@@ -43,9 +41,23 @@
 </div>
 
 <div class="graph-row">
-    <canvas id="stepsChart"></canvas>
-    <canvas id="calChart"></canvas>
+
+    <div class="graph-card">
+        <h3>Steps Analytics</h3>
+        <canvas id="stepsChart"></canvas>
+    </div>
+
+    <div class="graph-card">
+        <h3>Calories Analytics</h3>
+        <canvas id="calChart"></canvas>
+    </div>
+
 </div>
+
+<p id="streak"></p>
+
+<h3 id="stepsComment"></h3>
+<h3 id="calComment"></h3>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="app.js"></script>
