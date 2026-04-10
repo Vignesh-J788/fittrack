@@ -20,13 +20,13 @@ body {
     text-align: center;
 }
 
-/* Colors (solid boxes) */
+/* Colors */
 .steps { background: linear-gradient(135deg,#ff7a18,#ff3d00); }
 .calories { background: linear-gradient(135deg,#ff4ecd,#ff0080); }
 .bmi { background: linear-gradient(135deg,#34d399,#059669); }
 .duration { background: linear-gradient(135deg,#4facfe,#00c6ff); }
 
-/* RING STYLE (ONLY BORDER PROGRESS) */
+/* RING */
 .ring {
     width: 120px;
     height: 120px;
@@ -35,7 +35,7 @@ body {
     position: relative;
 }
 
-/* Inner circle (BLACK center) */
+/* Inner black circle */
 .ring::before {
     content: "";
     position: absolute;
@@ -44,7 +44,7 @@ body {
     border-radius: 50%;
 }
 
-/* Value inside */
+/* Value */
 .ring span {
     position: absolute;
     width: 100%;
@@ -56,19 +56,29 @@ body {
     z-index: 2;
 }
 
-/* Graph */
+/* GRAPH */
 .graph-row {
     margin-top: 20px;
     display: flex;
     gap: 20px;
 }
 
-/* Each graph box */
 .graph-row canvas {
     flex: 1;
     max-width: 48%;
-    height: 220px !important; /* reduce height */
+    height: 220px !important;
     background: #1e293b;
     border-radius: 20px;
     padding: 10px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .top-row, .bottom-row, .graph-row {
+        flex-direction: column;
+    }
+
+    .graph-row canvas {
+        max-width: 100%;
+    }
 }
