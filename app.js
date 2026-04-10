@@ -1,11 +1,12 @@
 let stepGoal = 10000;
 let calGoal = 500;
 
-// GET USER DATA
+// USER DATA
 let user = JSON.parse(localStorage.getItem("userData")) || {};
 let name = user.name || "User";
 
-document.getElementById("greeting").innerText = "Hello, " + name + " 👋";
+document.getElementById("greeting").innerText =
+    "Hello, " + name + " 👋";
 
 let steps = user.steps || 0;
 let calories = user.calories || 0;
@@ -13,7 +14,7 @@ let duration = user.duration || 0;
 let weight = user.weight || 0;
 let height = user.height || 1;
 
-// UPDATE RINGS
+// RINGS
 updateRing("stepsRing", "stepsValue", steps, stepGoal, "#00f2fe");
 updateRing("calRing", "calValue", calories, calGoal, "#ff4ecd");
 
@@ -33,12 +34,14 @@ else if (bmi < 25) status = "Good";
 else if (bmi < 30) status = "Overweight";
 else status = "Obese";
 
-document.getElementById("bmiValue").innerText = bmi + " (" + status + ")";
+document.getElementById("bmiValue").innerText =
+    bmi + " (" + status + ")";
 
 // Duration
-document.getElementById("durValue").innerText = duration + " min";
+document.getElementById("durValue").innerText =
+    duration + " min";
 
-// RING FUNCTION (ONLY BORDER ARC)
+// RING FUNCTION
 function updateRing(ringId, textId, value, goal, color) {
 
     let percent = Math.min((value / goal) * 100, 100);
@@ -52,7 +55,7 @@ function updateRing(ringId, textId, value, goal, color) {
     document.getElementById(textId).innerText = value;
 }
 
-// HISTORY (MULTI USER)
+// HISTORY
 let key = "history_" + name;
 let history = JSON.parse(localStorage.getItem(key)) || [];
 
@@ -77,7 +80,7 @@ new Chart(document.getElementById("stepsChart"), {
             borderColor: "#00f2fe",
             tension: 0.4
         }]
-    }
+    },
     options: {
         responsive: true,
         maintainAspectRatio: false
@@ -94,7 +97,7 @@ new Chart(document.getElementById("calChart"), {
             borderColor: "#ff4ecd",
             tension: 0.4
         }]
-    }
+    },
     options: {
         responsive: true,
         maintainAspectRatio: false
