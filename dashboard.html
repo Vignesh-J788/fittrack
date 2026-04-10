@@ -8,59 +8,49 @@
 
 <h2 id="greeting"></h2>
 
-<!-- TOP -->
 <div class="top-row">
 
-    <div class="card big">
+    <!-- STEPS -->
+    <div class="card steps">
         <h3>Steps</h3>
-        <p class="goal-text" id="stepGoalText"></p>
-        <div class="circle" id="stepsRing"></div>
+        <div class="ring" id="stepsRing">
+            <span id="stepsValue"></span>
+        </div>
         <p id="stepsRemain"></p>
     </div>
 
-    <div class="card big">
+    <!-- CALORIES -->
+    <div class="card calories">
         <h3>Calories</h3>
-        <p class="goal-text" id="calGoalText"></p>
-        <div class="circle" id="calRing"></div>
+        <div class="ring" id="calRing">
+            <span id="calValue"></span>
+        </div>
         <p id="calRemain"></p>
     </div>
 
 </div>
 
-<!-- SMALL -->
 <div class="bottom-row">
 
-    <div class="card small">
+    <!-- BMI -->
+    <div class="card bmi">
         <h3>BMI</h3>
-        <div class="circle" id="bmiRing"></div>
+        <p id="bmiValue"></p>
     </div>
 
-    <div class="card small">
+    <!-- DURATION -->
+    <div class="card duration">
         <h3>Duration</h3>
-        <div class="circle" id="durRing"></div>
+        <p id="durValue"></p>
     </div>
 
 </div>
 
 <!-- GRAPHS -->
 <div class="graph-row">
-
-    <div class="graph-card">
-        <h3>Steps Analytics</h3>
-        <canvas id="stepsChart"></canvas>
-    </div>
-
-    <div class="graph-card">
-        <h3>Calories Analytics</h3>
-        <canvas id="calChart"></canvas>
-    </div>
-
+    <canvas id="stepsChart"></canvas>
+    <canvas id="calChart"></canvas>
 </div>
-
-<p id="streak"></p>
-
-<h3 id="stepsComment"></h3>
-<h3 id="calComment"></h3>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="app.js"></script>
