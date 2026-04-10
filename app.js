@@ -1,5 +1,6 @@
 let stepGoal = 10000;
 let calGoal = 500;
+let durGoal = 60;
 
 // USER DATA
 let user = JSON.parse(localStorage.getItem("userData")) || {};
@@ -8,7 +9,7 @@ let username = user.name || "User";
 document.getElementById("greeting").innerText =
     "Hello, " + username + " 👋";
 
-// DISPLAY GOALS
+// GOALS
 document.getElementById("stepGoalText").innerText =
     "Goal: " + stepGoal + " steps";
 
@@ -22,15 +23,18 @@ let duration = user.duration || 0;
 let weight = user.weight || 0;
 let height = user.height || 1;
 
-// RINGS
+// BMI
+let bmi = (weight / (height * height)).toFixed(2);
+
+// UPDATE RINGS
 updateRing("stepsRing", steps, stepGoal, "#00f2fe"); // cyan
 updateRing("calRing", calories, calGoal, "#ff4ecd"); // pink
+updateRing("durRing", duration, durGoal, "#4facfe"); // blue
+updateRing("bmiRing", bmi, 30, "#22c55e"); // green
 
-// Duration (solid progress)
-updateRing("durRing", duration, 60, "#4facfe");
-
-// BMI (use max 30 as reference)
-updateRing("bmiRing", bmi, 30, "#22c55e");
+// TEXT INSIDE
+document.getElementById("bmiRing").innerText = bmi;
+document.getElementById("durRing").innerText = duration;
 
 // REMAINING
 document.getElementById("stepsRemain").innerText =
@@ -38,28 +42,6 @@ document.getElementById("stepsRemain").innerText =
 
 document.getElementById("calRemain").innerText =
     "Remaining: " + Math.max(calGoal - calories, 0);
-
-// BMI
-let bmi = (weight / (height * height)).toFixed(2);
-
-let status = "";
-
-if (bmi < 18.5) status = "Underweight ⚠️";
-else if (bmi < 25) status = "Good 👍";
-else if (bmi < 30) status = "Overweight ⚠️";
-else status = "Obese ❌";
-
-document.getElementById("bmiValue").innerText =
-    bmi + " (" + status + ")";
-let bmiText = document.getElementById("bmiValue");
-
-if (bmi < 18.5) bmiText.style.color = "#facc15";
-else if (bmi < 25) bmiText.style.color = "#22c55e";
-else if (bmi < 30) bmiText.style.color = "#f97316";
-else bmiText.style.color = "#ef4444";
-
-// Duration
-document.getElementById("durValue").innerText = duration + " min";
 
 // COMMENTS
 function getComment(percent) {
@@ -77,11 +59,11 @@ document.getElementById("calComment").innerText =
 
 // RING FUNCTION
 function updateRing(id, value, goal, color) {
-
     let percent = Math.min((value / goal) * 100, 100);
-    let deg = percent * 3.6; // convert % to degrees
+    let deg = percent * 3.6;
 
     let ring = document.getElementById(id);
+
     ring.innerText = value;
 
     ring.style.setProperty("--percent", deg + "deg");
@@ -108,7 +90,11 @@ new Chart(document.getElementById("stepsChart"), {
     type: "line",
     data: {
         labels,
-        datasets: [{ data: stepsData, borderColor: "#00f2fe", tension: 0.4 }]
+        datasets: [{
+            data: stepsData,
+            borderColor: "#00f2fe",
+            tension: 0.4
+        }]
     }
 });
 
@@ -116,7 +102,11 @@ new Chart(document.getElementById("calChart"), {
     type: "line",
     data: {
         labels,
-        datasets: [{ data: calData, borderColor: "#ff4ecd", tension: 0.4 }]
+        datasets: [{
+            data: calData,
+            borderColor: "#ff4ecd",
+            tension: 0.4
+        }]
     }
 });
 
