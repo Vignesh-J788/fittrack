@@ -82,7 +82,6 @@ function enterDashboard() {
     let weight = +inputs[4].value;
     let height = +inputs[5].value;
 
-    // VALIDATION
     if (!name || !steps || !calories || !duration || !weight || !height) {
         alert("Please fill all fields ❗");
         return;
@@ -98,9 +97,7 @@ function enterDashboard() {
         return;
     }
 
-    let data = {
-        name, steps, calories, duration, weight, height
-    };
+    let data = { name, steps, calories, duration, weight, height };
 
     localStorage.setItem("userData", JSON.stringify(data));
 
